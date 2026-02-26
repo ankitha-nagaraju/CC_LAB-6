@@ -1,0 +1,14 @@
+FROM jenkins/jenkins:lts
+
+USER root
+
+# Update package list, install required packages, clean cache
+RUN apt-get update --fix-missing && \
+    apt-get install -y --no-install-recommends \
+        docker.io \
+        make \
+        g++ \
+        curl && \
+    rm -rf /var/lib/apt/lists/*
+
+USER jenkins
